@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping Pong Game</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlaza el archivo CSS externo -->
+</head>
+<body>
+    <audio id="backgroundMusic" src="LavenderSong.mp3" loop></audio>
+    <div id="menu">
+        <h1>Ping Pong</h1>
+        <label for="difficulty">Elige dificultad:</label>
+        <select id="difficulty">
+            <option value="easy">Fácil</option>
+            <option value="medium" selected>Medio</option>
+            <option value="hard">Difícil</option>
+        </select>
+        <br><br>
+        <button id="startGame">Iniciar Juego</button>
+    </div>
+
+    <div id="iconSelection" style="display: none;">
+        <h2> Selecciona un País </h2>
+        <div class="icons">
+            <img src="mexico.png" id="mexico" class="icon" onclick="selectIcon('mexico.png')">
+            <img src="argentina.png" id="icon2" class="icon" onclick="selectIcon('argentina.png')">
+            <img src="espana.png" id="icon3" class="icon" onclick="selectIcon('espana.png')">
+            <img src="colombia.png" id="icon4" class="icon" onclick="selectIcon('colombia.png')">
+            <img src="francia.png" id="icon5" class="icon" onclick="selectIcon('francia.png')">
+            <img src="alemania.png" id="icon6" class="icon" onclick="selectIcon('alemania.png')">
+            <img src="bolivia.png" id="icon7" class="icon" onclick="selectIcon('bolivia.png')">
+        </div>
+        <button id="acceptIcon" disabled>Aceptar</button>
+    </div>
+
+    <div id="winnerAnnouncement" style="display: none;">
+        <h2 id="winnerMessage"></h2>
+        <button id="goToMenu">Volver al menú</button>
+    </div>
+
+    <div class="scoreboard">
+        <button id="menuButton">Menú</button> <!-- Botón Menú -->
+        <img id="playerIcon" src="" alt="Icono del jugador" style="width: 40px; height: 40px; display: none;"> <!-- Icono del jugador -->
+        <img id="computerIcon" src="" alt="Icono de la IA" style="width: 40px; height: 40px; display: none;">
+    </div>
+    <div id="pauseMenu" style="display: none;">
+        <div id="pauseContent">
+            <h2>Menú</h2>
+            <button id="restartButton">Reiniciar</button>
+            <button id="backToMenuButton">Volver al Menú Principal</button>
+            <button id="muteButton">Silenciar Música</button>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+

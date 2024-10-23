@@ -38,6 +38,8 @@ let computerSpeed = 3; // Velocidad de la computadora
 let selectedIcon = ''; // Variable para almacenar el ícono seleccionado
 let playerIcon = new Image(); // Cambiamos a una imagen
 let isPaused = false; // Variable para controlar si el juego está pausado
+let ballColor = '#FFFFFF'; // Color inicial de la pelota
+
 
 // Marcadores
 let playerScore = 0;
@@ -256,6 +258,15 @@ canvas.addEventListener('mousemove', (event) => {
     playerY = event.clientY - canvasPosition.top - paddleHeight / 2;
 });
 
+function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 function gameLoop() {
     if (playerScore >= winningScore || computerScore >= winningScore) {
         displayWinner();
@@ -277,14 +288,24 @@ function gameLoop() {
     ballY += ballSpeedY;
 
     // Rebote en las paredes superior e inferior
-    if (ballY <= 0 || ballY >= canvas.height) ballSpeedY = -ballSpeedY;
+    if (ballY <= 0 || ballY >= canvas.height) {
+        ballSpeedY = -ballSpeedY;
+        // Cambiar el color de la pelota al rebotar
+        ballColor = getRandomColor(); // Cambia el color de la pelota
+        // Cambiar el color del borde del canvas
+        canvas.style.borderColor = ballColor; // Cambia el color del borde
+    }
 
     // Rebote en las raquetas
     if (ballX <= paddleWidth && ballY >= playerY && ballY <= playerY + paddleHeight) {
         ballSpeedX = -ballSpeedX;
+        ballColor = getRandomColor(); // Cambia el color de la pelota
+        canvas.style.borderColor = ballColor; // Cambia el color del borde
     }
     if (ballX >= canvas.width - paddleWidth && ballY >= computerY && ballY <= computerY + paddleHeight) {
         ballSpeedX = -ballSpeedX;
+        ballColor = getRandomColor(); // Cambia el color de la pelota
+        canvas.style.borderColor = ballColor; // Cambia el color del borde
     }
 
     // Punto para la computadora
@@ -302,6 +323,8 @@ function gameLoop() {
     drawEverything();
     animationId = requestAnimationFrame(gameLoop); // Guarda el ID de la animación
 }
+
+
 
 // Agregar evento al botón Menú
 document.getElementById('menuButton').addEventListener('click', togglePause);
@@ -371,6 +394,13 @@ function returnToMenu() {
 function drawEverything() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+     // Dibuja la pelota con el color actual
+     ctx.fillStyle = ballColor; // Usa la variable de color de la pelota
+    ctx.beginPath();
+     ctx.arc(ballX, ballY, 10, 0, Math.PI * 2, false); // Cambia el radio según tu diseño
+    ctx.fill();
+    ctx.closePath();
+    
     // Colores de la raqueta según el ícono seleccionado
     const colors = getPaddleColor();
     ctx.fillStyle = colors[0];
@@ -383,13 +413,6 @@ function drawEverything() {
     // Raqueta de la computadora
     ctx.fillStyle = 'green'; // Puedes cambiar el color de la raqueta de la computadora
     ctx.fillRect(canvas.width - paddleWidth, computerY, paddleWidth, paddleHeight);
-
-    // Bola
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, 10, 0, Math.PI * 2);
-    ctx.fillStyle = 'orange';
-    ctx.fill();
-    ctx.closePath();
 
     // Dibuja el marcador
     drawScore();

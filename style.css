@@ -23,7 +23,7 @@ body {
 canvas {
     background-color: black; /* Fondo del canvas */
     display: none; /* Oculto por defecto */
-    border: 2px solid white; /* Borde blanco alrededor del canvas */
+    border: 2px solid blue; /* Borde blanco alrededor del canvas */
 }
 
 button {

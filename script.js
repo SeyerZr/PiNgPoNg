@@ -80,6 +80,7 @@ document.getElementById("infoIcon").addEventListener("click", function() {
 document.getElementById("closeHelp").addEventListener("click", function() {
     document.getElementById("helpMessage").style.display = "none";
 });
+
 function startIconSelection() {
     menu.style.display = 'none';
     iconSelection.style.display = 'block';

@@ -73,7 +73,13 @@ document.getElementById("muteButton").addEventListener("click", function() {
 
     isMuted = !isMuted; // Cambia el estado de mute
 });
+document.getElementById("infoIcon").addEventListener("click", function() {
+    document.getElementById("helpMessage").style.display = "block";
+});
 
+document.getElementById("closeHelp").addEventListener("click", function() {
+    document.getElementById("helpMessage").style.display = "none";
+});
 function startIconSelection() {
     menu.style.display = 'none';
     iconSelection.style.display = 'block';
